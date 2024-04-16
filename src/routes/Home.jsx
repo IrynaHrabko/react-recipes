@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import SearchForm from "../components/SearchForm";
 import RecipeCard from "../components/cards/RecipeCard";
+import { useNavigate } from "react-router-dom";
 
 
 const Home = () => {
@@ -9,6 +10,7 @@ const Home = () => {
   const API_BASEURL = 'https://api.edamam.com/api/recipes/v2';
   const APP_ID = 'eaafc3f9';
   const APP_KEY = '68254fb25e1c15f4fa4cbcac2ff1ab16';
+  const navigate = useNavigate()
   let [query, setQuery] = useState('')
   let [search, setSearch] = useState('')
   let [result, setResult] = useState([])
@@ -34,19 +36,19 @@ const Home = () => {
     }, [search])
 
 
-    const getIdFromURI = (uri) => {
-      console.log(uri)
-      return "test"
-    }
+  const getIdFromURI = (uri) => uri.split('recipe_')[1]
+  
   return (
     <>
       <SearchForm submitHandler={submitHandler} inputHandler={inputHandler}/>
 
       <section>
         {result.map(item => (
-          <RecipeCard key={getIdFromURI(item.recipe.uri)} title={item.recipe.label} imgUrl={item.recipe.image} id={getIdFromURI(item.recipe.uri)}/>
+          <RecipeCard key={item.recipe.uri} title={item.recipe.label} imgUrl={item.recipe.image} id={getIdFromURI(item.recipe.uri)}/>
         ))}
       </section>
+
+
     </>
   )
 }

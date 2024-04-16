@@ -1,4 +1,5 @@
-import { NavLink } from "react-router-dom"
+
+import { Link } from "react-router-dom"
 
 const RecipeCard = ({title, imgUrl, id}) => {
   return (
@@ -7,9 +8,9 @@ const RecipeCard = ({title, imgUrl, id}) => {
       <h2>
         {title}
       </h2>
-      <a href="#">
-        More 
-      </a>
+      <Link to={`/recipe/${id}`}>
+        {"More >"}
+      </Link>
     </article>
   )
 }
